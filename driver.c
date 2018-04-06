@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/05 19:20:33 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/04/06 16:58:17 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,15 @@ int		handle_keys(int key, t_mlx *mlx)
 	if (key == 49)
 		mlx->crosshairs = (mlx->crosshairs) ? 0 : 1;
 	if (key == 123)
-		mlx->map = rotate_x(mlx->map, -1);
-	if (key == 124)
 		mlx->map = rotate_x(mlx->map, 1);
-	//printf("x_offset = %d\n", mlx->map->x_offset);
+	if (key == 124)
+		mlx->map = rotate_x(mlx->map, -1);
+	if (key == 125)
+		mlx->map = rotate_y(mlx->map, 1);
+	if (key == 126)
+		mlx->map = rotate_y(mlx->map, -1);
+	printf("x_offset = %d\n", mlx->map->x_offset);
+	printf("y_offset = %d\n", mlx->map->y_offset);
 	mlx_clear_window(mlx->mlx, mlx->win);
 	if (mlx->crosshairs)
 		center_lines(mlx->mlx, mlx->map);
@@ -51,6 +56,8 @@ int		main(int argc, char **argv)
 			ft_putendl("error reading map");
 			return (0);
 		}
+		mlx->map = rotate_x(mlx->map, -1);
+		mlx->map = rotate_y(mlx->map, -1);
 		draw_map(mlx, mlx->map);
 		mlx_key_hook(mlx->win, handle_keys, mlx);
 		mlx_loop(mlx->mlx);
