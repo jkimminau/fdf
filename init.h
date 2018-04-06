@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nextspace.c                                     :+:      :+:    :+:   */
+/*   init.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/24 22:19:25 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/02 15:23:28 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/04/02 18:32:29 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/04/04 16:33:27 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef INIT_H
+# define INIT_H
 
-char	*ft_nextspace(char *str)
-{
-	while (*str && *str != ' ')
-		str++;
-	return (str);
-}
+# include "fdf.h"
+
+t_mlx	*mlx_free(t_mlx *mlx, char *errmsg);
+t_mlx	*initialize();
+
+#endif

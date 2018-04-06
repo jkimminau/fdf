@@ -6,17 +6,25 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/19 19:11:37 by jkimmina          #+#    #+#              #
-#    Updated: 2018/04/01 16:16:57 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/04/05 13:29:13 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 
 SRC =	driver.c	\
+		draw.c		\
+		map.c		\
+		init.c		\
+		view.c
 
 OBJ =	$(SRC:.c=.o)
 
 HEADER = fdf.h		\
+		 draw.h		\
+		 map.h		\
+		 init.h		\
+		 view.h
 
 HEADERDIR = .
 

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_nextspace.c                                     :+:      :+:    :+:   */
+/*   view.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/24 22:19:25 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/02 15:23:28 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/04/05 13:11:35 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/04/05 18:33:56 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef VIEW_H
+# define VIEW_H
 
-char	*ft_nextspace(char *str)
-{
-	while (*str && *str != ' ')
-		str++;
-	return (str);
-}
+# include "fdf.h"
+
+t_map	*rotate_x(t_map *map, int dgr);
+t_map	*rotate_y(t_map *map, double dgr);
+
+#endif
