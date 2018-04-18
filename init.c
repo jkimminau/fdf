@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/05 16:08:53 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/04/17 10:08:16 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ t_mlx	*initialize(void)
 	if (!(mlx->win = mlx_new_window(mlx->mlx,
 					WINDOW_WIDTH, WINDOW_LENGTH, "fdf - 42")))
 		return (mlx_free(mlx, "error initializing window pointer\n"));
+	mlx->color = 0x0000FF;
 	mlx->crosshairs = 0;
+	mlx->party = 0;
+	mlx->minimal = 0;
+	mlx->surge = 0;
+	mlx->ss = 1;
 	return (mlx);
 }

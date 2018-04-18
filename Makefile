@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/19 19:11:37 by jkimmina          #+#    #+#              #
-#    Updated: 2018/04/05 13:29:13 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/04/17 09:59:46 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,9 @@ SRC =	driver.c	\
 		draw.c		\
 		map.c		\
 		init.c		\
-		view.c
+		view.c		\
+		move.c		\
+		key.c
 
 OBJ =	$(SRC:.c=.o)
 
@@ -24,7 +26,10 @@ HEADER = fdf.h		\
 		 draw.h		\
 		 map.h		\
 		 init.h		\
-		 view.h
+		 view.h		\
+		 move.h		\
+		 structs.h	\
+		 key.h
 
 HEADERDIR = .
 

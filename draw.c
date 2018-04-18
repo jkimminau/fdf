@@ -6,87 +6,93 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 17:17:21 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/05 18:53:36 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/04/16 21:33:45 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-void	draw_line(t_mlx *mlx, t_point p1, t_point p2, t_map *map)
+int		getcolor(t_mlx *mlx, t_point l)
+{
+	if (mlx->party)
+		return (color_increment(mlx->color, l.z + l.y + l.x));
+	else if (mlx->minimal)
+		return (mlx->color * l.z / mlx->map->maxz);
+	else if (mlx->surge)
+		return (mlx->color * (mlx->surge == (int)l.z));
+	else
+		return (color_increment(mlx->color, l.z * 10));
+}
+
+void	draw_line(t_mlx *mlx, t_point p1, t_point p2)
 {
 	t_point		d;
 	t_point		l;
 	double		inc;
 
-	(void)map;
-	d.x = (int)(p2.x) - (int)(p1.x);
-	d.y = (int)(p2.y) - (int)(p1.y);
-	d.z = (int)(p2.z) - (int)(p1.z);
-	inc = (ft_abs(d.x) > ft_abs(d.y)) ? ft_abs(d.x) : ft_abs(d.y);
-	l.x = (int)p1.x;
-	l.y = (int)p1.y;
-	l.z = (int)p1.z;
-	while (((p2.x - l.x) * d.x) > 0 || ((p2.y - l.y) * d.y) > 0)
+	d.x = (p2.px - p1.px);
+	d.y = (p2.py - p1.py);
+	d.z = (p2.z - p1.z);
+	inc = (fabs(d.x) > fabs(d.y)) ? fabs(d.x) : fabs(d.y);
+	l.x = p1.px;
+	l.y = p1.py;
+	l.z = p1.z;
+	while (fabs(p2.px - l.x) > 1 || fabs(p2.py - l.y) > 1)
 	{
 		mlx_pixel_put(mlx->mlx, mlx->win, l.x, l.y,
-			map->colorlo + ((l.z / map->maxz) * (map->colorhi - map->colorlo)));
-		//mlx_pixel_put(mlx->mlx, mlx->win, l.x, l.y, 0xFFFFFF);
+				getcolor(mlx, l));
 		l.x += (d.x / inc);
 		l.y += (d.y / inc);
 		l.z += (d.z / inc);
 	}
 }
 
-void	center_lines(t_mlx *mlx, t_map *map)
+void	center_lines(t_mlx *mlx)
 {
 	t_point p1;
 	t_point p2;
 	t_point p3;
 	t_point p4;
-	int		color;
 
-	color = map->colorhi;
-	map->colorhi = 0xFF0000;
-	p1.x = WINDOW_WIDTH / 2;
-	p1.y = 0;
-	p1.z = map->maxz;
-	p2.x = WINDOW_WIDTH / 2;
-	p2.y = WINDOW_LENGTH;
-	p2.z = map->maxz;
-	p3.x = 0;
-	p3.y = WINDOW_LENGTH / 2;
-	p3.z = map->maxz;
-	p4.x = WINDOW_WIDTH;
-	p4.y = WINDOW_LENGTH / 2;
-	p4.z = map->maxz;
-	draw_line(mlx, p1, p2, map);
-	draw_line(mlx, p3, p4, map);
-	map->colorhi = color;
+	p1.px = WINDOW_WIDTH / 2;
+	p1.py = 0;
+	p1.z = 0;
+	p2.px = WINDOW_WIDTH / 2;
+	p2.py = WINDOW_LENGTH;
+	p2.z = 0;
+	p3.px = 0;
+	p3.py = WINDOW_LENGTH / 2;
+	p3.z = 0;
+	p4.px = WINDOW_WIDTH;
+	p4.py = WINDOW_LENGTH / 2;
+	p4.z = 0;
+	draw_line(mlx, p1, p2);
+	draw_line(mlx, p3, p4);
 }
 
-void	draw_map(t_mlx *mlx, t_map *map)
+void	draw_map(t_mlx *mlx)
 {
 	int		i;
 	int		j;
 
 	i = 0;
-	while (i < map->length)
+	while (i < mlx->map->len)
 	{
 		j = 0;
-		while (j < map->width - 1)
+		while (j < mlx->map->wid - 1)
 		{
-			draw_line(mlx, map->map[i][j], map->map[i][j + 1], map);
+			draw_line(mlx, mlx->map->map[i][j], mlx->map->map[i][j + 1]);
 			j++;
 		}
 		i++;
 	}
 	j = 0;
-	while (j < map->width)
+	while (j < mlx->map->wid)
 	{
 		i = 0;
-		while (i < map->length - 1)
+		while (i < mlx->map->len - 1)
 		{
-			draw_line(mlx, map->map[i][j], map->map[i + 1][j], map);
+			draw_line(mlx, mlx->map->map[i][j], mlx->map->map[i + 1][j]);
 			i++;
 		}
 		j++;
