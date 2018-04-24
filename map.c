@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 15:50:15 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/04/18 19:58:52 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/04/24 13:24:47 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ t_map			*freemap(t_map **map)
 	int		i;
 
 	i = 0;
+	(*map)->map = malloc(sizeof((*map)->wid));
 	while (i < (*map)->len)
 	{
 		(*map)->map[i] = malloc(sizeof(1));
 		free((*map)->map[i++]);
 	}
-	(*map)->map = malloc(sizeof(1));
 	free((*map)->map);
 	*map = malloc(sizeof(1));
 	free(*map);
