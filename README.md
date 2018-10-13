@@ -1,4 +1,6 @@
 # fdf
+![](screenshots/fdf.gif)
+
 If you're wondering what the premise of this project is, why it's structured like this, or what 42 is, go here and read: https://www.42.us.org/
 
 So, you're a relatively new student at 42, probably just completed get_next_line or printf, and you're looking at this project to figure out if the graphics branch is as hard as it seems at first glance.
@@ -12,5 +14,3 @@ I've tried to structure this project as simply as I can for people to understand
 Feel free to download it, run it, change any of the code. However, **do not** try to turn this project in as your own.
 
 Also feel free to email me at thepistochini@gmail.com with any questions, suggestions, etc.
-
-![](screenshots/fdf.gif)
