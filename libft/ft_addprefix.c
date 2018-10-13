@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_addprefix.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 13:07:42 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/07/23 16:50:36 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/05/04 14:28:19 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/05/05 16:33:40 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_addprefix(char *pre, char *str)
 {
-	while (n--)
-	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		if (!*s1)
-			return (0);
-		s1++;
-		s2++;
-	}
-	return (0);
+	char *tmp;
+
+	tmp = ft_strjoin(pre, str);
+	free(str);
+	return (tmp);
 }

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_printf_struct.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 13:07:42 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/07/23 16:50:36 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/04/24 13:05:20 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/07/23 15:35:17 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#ifndef FT_PRINTF_STRUCT_H
+# define FT_PRINTF_STRUCT_H
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+# include <stdlib.h>
+
+typedef struct	s_flags
 {
-	while (n--)
-	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		if (!*s1)
-			return (0);
-		s1++;
-		s2++;
-	}
-	return (0);
-}
+	int			alt;
+	int			zero;
+	int			minus;
+	int			plus;
+	int			space;
+	int			prec;
+	int			width;
+	int			strlen;
+	char		*key;
+	char		*flagstr;
+}				t_flags;
+
+t_flags			*free_flags(t_flags *flags);
+t_flags			*new_flags(void);
+
+#endif

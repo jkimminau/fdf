@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_wstrsub.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 13:07:42 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/07/23 16:50:36 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/05/05 18:45:45 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/05/07 14:06:22 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+wchar_t	*ft_wstrsub(wchar_t const *s, int start, size_t len)
 {
-	while (n--)
-	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		if (!*s1)
-			return (0);
-		s1++;
-		s2++;
-	}
-	return (0);
+	wchar_t	*tmp;
+	size_t	i;
+
+	if (!s)
+		return (NULL);
+	tmp = (wchar_t *)malloc(sizeof(wchar_t) * (len + 1));
+	if (!tmp)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		tmp[i] = s[start + i];
+	tmp[i] = '\0';
+	return (tmp);
 }

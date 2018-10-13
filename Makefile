@@ -1,68 +1,49 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/02/19 19:11:37 by jkimmina          #+#    #+#              #
-#    Updated: 2018/04/18 19:42:43 by jkimmina         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = fdf
 
-SRC =	driver.c	\
-		draw.c		\
-		map.c		\
-		init.c		\
-		view.c		\
-		key.c
+CC = gcc 
 
-OBJ =	$(SRC:.c=.o)
+CFLAGS = -Wall -Wextra -Werror
 
-HEADER = fdf.h		\
-		 draw.h		\
-		 map.h		\
-		 init.h		\
-		 view.h		\
-		 structs.h	\
-		 key.h
+SRC =	src/fdf.c	\
+		src/draw.c	\
+		src/key.c	\
+		src/init.c	\
+		src/parse.c	\
+		src/view.c	\
 
-HEADERDIR = .
+HEADER_DIR =	.	\
 
-FLAGS = -Wall -Werror -Wextra
+OBJ = $(SRC:.c=.o)
 
-LIBFT = ./libft/libft.a
-LIBFTLINK = -L./libft/ -lft
+LIBFT = libft/libft.a
+LIBFTH = libft/libft.h
+LIBFTLNK = -L libft/ -l ft
 
-LIBMLX = ./minilibx/libmlx.a
-LIBMLXLINK = -L./X11_minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
+MLX = minilibx/libmlx.a
+MLXH = minilibx/mlx.h
+MLXLNK = -L minilibx/ -l mlx -framework OpenGL -framework AppKit
 
-.PHONY: all clean fclean re
-
-all: $(NAME)
-
-libft: $(LIBFT)
+all : $(NAME)
 
 $(LIBFT):
-	make -C ./libft
+	make -C libft/
 
-libmlx: $(LIBMLX)
+$(MLX):
+	make -C minilibx/
 
-$(LIBMLX):
-	make -C ./X11_minilibx_macos/
+$(OBJ): $(SRC)
+	gcc $(CFLAGS) -c $(SRC) -I .
+	mv *.o src
 
-$(NAME): $(LIBFT) $(LIBMLX)
-	gcc $(FLAGS) -c $(SRC) -I$(HEADERDIR)
-	gcc $(LIBRARY) $(OBJ) -o $(NAME) $(LIBFTLINK) $(LIBMLXLINK)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	gcc $(OBJ) -o $(NAME) $(LIBFTLNK) $(MLXLNK)
 
 clean:
-	/bin/rm -f $(OBJ) $(HEADER:.h=.h.gch)
+	/bin/rm -f $(OBJ)
 
 fclean: clean
-	/bin/rm -f $(NAME)
 	make fclean -C libft/
-	make clean -C X11_minilibx_macos/
+	make clean -C minilibx/
+	/bin/rm -f fdf
 
 re: fclean all
