@@ -1,8 +1,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WID 1440
-# define LEN 900
+# define WID 1000
+# define LEN 800
 
 # include <stdlib.h>
 # include <math.h>
