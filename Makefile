@@ -4,12 +4,14 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =	src/fdf.c	\
-		src/draw.c	\
-		src/key.c	\
-		src/init.c	\
-		src/parse.c	\
-		src/view.c	\
+SRC_C =	fdf.c	\
+		draw.c	\
+		key.c	\
+		init.c	\
+		parse.c	\
+		view.c	\
+
+SRC = $(addprefix src/, $(SRC_C))
 
 HEADER_DIR =	.	\
 
@@ -26,7 +28,7 @@ MLXLNK = -L minilibx/ -l mlx -framework OpenGL -framework AppKit
 all : $(NAME)
 
 $(LIBFT):
-	make -C libft/
+	@make -C libft/
 
 $(MLX):
 	make -C minilibx/
@@ -35,15 +37,15 @@ $(OBJ): $(SRC)
 	gcc $(CFLAGS) -c $(SRC) -I .
 	mv *.o src
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
+$(NAME): $(LIBFT) $(OBJ) $(MLX)
 	gcc $(OBJ) -o $(NAME) $(LIBFTLNK) $(MLXLNK)
 
 clean:
 	/bin/rm -f $(OBJ)
 
 fclean: clean
-	make fclean -C libft/
-	make clean -C minilibx/
+	@make fclean -C libft/
+	@make clean -C minilibx/
 	/bin/rm -f fdf
 
 re: fclean all
