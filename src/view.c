@@ -18,12 +18,8 @@ t_point		project_point(t_fdf *fdf, t_point p)
 	x = p.x;
 	y = p.y;
 	z = p.z;
-	pp.x = (WID / 2) + (cos(fdf->cam->x * c) * (x - (WID / 2)))
-			+ (z * sin(fdf->cam->x * c) * fdf->z * cos(c * fdf->cam->y))
-			- ((LEN / 2) * sin(c * fdf->cam->y) * sin(c * fdf->cam->x)
-					* ((y - (LEN / 2)) / (LEN / 2)));
-	pp.y = (LEN / 2) + (cos(fdf->cam->y * c) * (y - (LEN / 2)))
-			+ (z * sin(fdf->cam->y * c) * fdf->z);
+	pp.x = (WID / 2) + (cos(fdf->cam->x * c) * (x - (WID / 2))) + (z * sin(fdf->cam->x * c) * fdf->z * cos(c * fdf->cam->y)) - ((LEN / 2) * sin(c * fdf->cam->y) * sin(c * fdf->cam->x) * ((y - (LEN / 2)) / (LEN / 2)));
+	pp.y = (LEN / 2) + (cos(fdf->cam->y * c) * (y - (LEN / 2))) + (z * sin(fdf->cam->y * c) * fdf->z);
 	pp.z = p.z;
 	return (pp);
 }
