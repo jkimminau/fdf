@@ -1,15 +1,19 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WID 1000
-# define LEN 800
-
 # include <stdlib.h>
 # include <math.h>
 # include <fcntl.h>
 # include "./minilibx/mlx.h"
 # include "./libft/libft.h"
 # include "./libft/gnl/get_next_line.h"
+# include <stdio.h>
+
+# define WID 1000
+# define LEN 800
+# define DEG2RAD M_PI / 180
+# define COS(x) cos(x * DEG2RAD)
+# define SIN(x) sin(x * DEG2RAD)
 
 typedef struct	s_point
 {
@@ -20,9 +24,11 @@ typedef struct	s_point
 
 typedef struct	s_map
 {
+	int			x;
+	int			y;
 	int			len;
 	int			wid;
-	t_point		**points;
+	t_point			**points;
 }				t_map;
 
 typedef struct	s_img
@@ -36,8 +42,8 @@ typedef struct	s_img
 
 typedef	struct	s_cam
 {
-	int			x;
-	int			y;
+	double			x;
+	double			y;
 }				t_cam;
 
 /*
@@ -50,10 +56,12 @@ typedef struct	s_fdf
 	t_img		*img;
 	t_map		*map;
 	t_cam		*cam;
-	int		color;
+	double		color;
 	int		autorotate;
 	int		z;
 	int		maxz;
+	int		mx;
+	int		my;
 	float		pulse;
 }				t_fdf;
 
@@ -61,6 +69,7 @@ void			free_all(t_fdf *fdf);
 t_point			new_point(int x, int y, int z);
 t_img			*init_img(void *mlx);
 t_fdf			*init_fdf();
+int			mouse_move(int x, int y, t_fdf *fdf);
 int			handle_keys(int key, t_fdf *fdf);
 int			parse(char *filename, t_fdf *fdf);
 void			img_pixel_put(t_img *img, int x, int y, int color);

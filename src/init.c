@@ -60,6 +60,8 @@ t_fdf		*init_fdf(void)
 	fdf->win = mlx_new_window(fdf->mlx, WID, LEN, "FDF");
 	fdf->img = init_img(fdf->mlx);
 	fdf->map = (t_map*)malloc(sizeof(t_map));
+	fdf->map->x = WID / 2;
+	fdf->map->y = LEN / 2;
 	fdf->cam = (t_cam*)malloc(sizeof(t_cam));
 	fdf->cam->x = 0;
 	fdf->cam->y = 0;
@@ -70,5 +72,7 @@ t_fdf		*init_fdf(void)
 	fdf->z = 10;
 	fdf->maxz = 0;
 	fdf->pulse = -1;
+	fdf->mx = WID / 2;
+	fdf->my = LEN / 2;
 	return (fdf);
 }

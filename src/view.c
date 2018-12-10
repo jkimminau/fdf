@@ -1,4 +1,5 @@
 #include <fdf.h>
+#include <stdio.h>
 
 /*
  * Gives a 2D position for a point given the current view and its 3D position.
@@ -6,21 +7,25 @@
  * Obviously this method is super ugly, I would highly recommed googling "orthographic projection" and using matrix multiplication instead.
  * Or you can just copy me like a dirty cheater lol.
  */
+
+
+
 t_point		project_point(t_fdf *fdf, t_point p)
 {
 	t_point		pp;
 	double		x;
 	double		y;
 	double		z;
-	double		c;
 
-	c = M_PI / 180;
 	x = p.x;
 	y = p.y;
 	z = p.z;
-	pp.x = (WID / 2) + (cos(fdf->cam->x * c) * (x - (WID / 2))) + (z * sin(fdf->cam->x * c) * fdf->z * cos(c * fdf->cam->y)) - ((LEN / 2) * sin(c * fdf->cam->y) * sin(c * fdf->cam->x) * ((y - (LEN / 2)) / (LEN / 2)));
-	pp.y = (LEN / 2) + (cos(fdf->cam->y * c) * (y - (LEN / 2))) + (z * sin(fdf->cam->y * c) * fdf->z);
+	
+
+	pp.x = fdf->map->x + (COS(fdf->cam->x) * (x - fdf->map->x)) + (z * SIN(fdf->cam->x) * fdf->z * COS(fdf->cam->y)) - (fdf->map->y * SIN(fdf->cam->y) * SIN(fdf->cam->x) * ((y - fdf->map->y) / fdf->map->y));
+	pp.y = fdf->map->y + (COS(fdf->cam->y) * (y - fdf->map->y)) + (z * SIN(fdf->cam->y) * fdf->z);
 	pp.z = p.z;
+
 	return (pp);
 }
 

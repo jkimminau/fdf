@@ -53,6 +53,7 @@ void			draw(t_fdf *fdf)
 	while (i < fdf->map->len)
 	{
 		j = 0;
+		img_pixel_put(fdf->img, fdf->map->x, fdf->map->y, 0xFF0000);
 		while (j < fdf->map->wid)
 		{
 			if (j < fdf->map->wid - 1)

@@ -14,6 +14,24 @@
 #define KEY_S 1
 #define KEY_P 35
 
+int		mouse_move(int x, int y, t_fdf *fdf)
+{
+	if (x >= 0 && x < WID && y >= 0 && y < LEN)
+	{
+		if (x != fdf->mx)
+		{
+			fdf->cam->x += x - fdf->mx;
+			fdf->mx = x;
+		}
+		if (y != fdf->my)
+		{
+			fdf->cam->y += y - fdf->my;
+			fdf->my = y;
+		}
+	}
+	return (0);
+}
+
 /*
  * Handler for every time any key on the keyboard is pressed.
  *
@@ -32,9 +50,9 @@ int		handle_keys(int key, t_fdf *fdf)
 		exit(0);
 	}
 	if (key == KEY_LEFT || key == KEY_RIGHT)
-		fdf->cam->x += (key == KEY_LEFT) ? -5 : 5;
+		fdf->map->x += fdf->map->wid * ((key == KEY_LEFT) ? -1 : 1);
 	if (key == KEY_UP || key == KEY_DOWN)
-		fdf->cam->y += (key == KEY_DOWN) ? -5 : 5;
+		fdf->map->y += fdf->map->len * ((key == KEY_DOWN) ? -1 : 1);
 	if (key == KEY_SPACE)
 		fdf->autorotate = (fdf->autorotate == 0) ? 1 : 0;
 	if (key == KEY_W)

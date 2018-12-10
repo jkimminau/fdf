@@ -12,10 +12,9 @@ SRC_C =	fdf.c	\
 		view.c	\
 
 SRC = $(addprefix src/, $(SRC_C))
+OBJ = $(addprefix obj/, $(SRC_C:.c=.o))
 
 HEADER_DIR =	.	\
-
-OBJ = $(SRC:.c=.o)
 
 LIBFT = libft/libft.a
 LIBFTH = libft/libft.h
@@ -31,21 +30,22 @@ $(LIBFT):
 	@make -C libft/
 
 $(MLX):
-	make -C minilibx/
+	@make -C minilibx/
 
 $(OBJ): $(SRC)
-	gcc $(CFLAGS) -c $(SRC) -I .
-	mv *.o src
+	@gcc $(CFLAGS) -c $(SRC) -I .
+	@mkdir  -p obj
+	@mv *.o obj
 
-$(NAME): $(LIBFT) $(OBJ) $(MLX)
-	gcc $(OBJ) -o $(NAME) $(LIBFTLNK) $(MLXLNK)
+$(NAME): $(LIBFT) $(MLX) $(OBJ)
+	@gcc $(OBJ) -o $(NAME) $(LIBFTLNK) $(MLXLNK)
 
 clean:
-	/bin/rm -f $(OBJ)
+	@/bin/rm -rf obj
 
 fclean: clean
 	@make fclean -C libft/
 	@make clean -C minilibx/
-	/bin/rm -f fdf
+	@/bin/rm -f fdf
 
 re: fclean all
