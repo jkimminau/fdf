@@ -1,6 +1,14 @@
 #include <fdf.h>
 
-#define PULSE_RATE 0.3
+# define PULSE_RATE 0.3
+# define EVENT_WINDOW_CLOSE 17
+
+int		handle_exit(t_fdf *fdf)
+{
+	free_all(fdf);
+	exit(0);
+	return (0);
+}
 
 /*
  * This function is called for every frame thta the image is rendered
@@ -48,6 +56,7 @@ int		main(int argc, char **argv)
 	mlx_hook(fdf->win, 6, 1L << 6, mouse_move, fdf);
 	mlx_loop_hook(fdf->mlx, loop_events, fdf);
 	mlx_hook(fdf->win, 2, 0, handle_keys, fdf);
+	mlx_hook(fdf->win, EVENT_WINDOW_CLOSE, 0, handle_exit, fdf);
 	mlx_loop(fdf->mlx);
 	return (0);
 }
