@@ -1,5 +1,5 @@
 # fdf
-![](screenshots/fdf.gif)
+![](screenshots/fdf2.gif)
 
 If you're wondering what the premise of this project is, why it's structured like this, or what 42 is, go here and read: https://www.42.us.org/
 
