@@ -1,6 +1,6 @@
 #include <fdf.h>
 
-# define PULSE_RATE 0.3
+# define PULSE_RATE 0.1
 # define EVENT_WINDOW_CLOSE 17
 
 int		handle_exit(t_fdf *fdf)
@@ -29,7 +29,7 @@ int		loop_events(t_fdf *fdf)
 	fdf->cam->x += (fdf->cam->x < 0) ? 360 : 0;
 	fdf->cam->y = (fdf->cam->y > 359) ? 0 : fdf->cam->y;
 	fdf->cam->y += (fdf->cam->y < 0) ? 360 : 0;
-	fdf->color = (fdf->color > 1536) ? 0 : fdf->color + 0.1;
+	fdf->color = (fdf->color > 1536) ? 0 : fdf->color + 1.0;
 	mlx_destroy_image(fdf->mlx, fdf->img->ptr);
 	free(fdf->img);
 	fdf->img = init_img(fdf->mlx);
